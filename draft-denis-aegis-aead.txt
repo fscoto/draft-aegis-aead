@@ -658,7 +658,7 @@ Table of Contents
 
 7.  Security Considerations
 
-   Both algorithms must be used in a nonce-respecting setting.  For a
+   Both algorithms must be used in a nonce-respecting setting: for a
    given key k, a nonce must only be used once.  Failure to do so would
    immediately reveal the bitwise difference between two messages.
 
