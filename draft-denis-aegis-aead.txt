@@ -197,18 +197,35 @@ Table of Contents
 
    Update(Ma, Mb)
 
-   Inputs: - Ma: the first 128-bit block to be absorbed - Mb: the second
-   128-bit block to be absorbed
+   Inputs:
 
-   Modifies: - {S0, ...S7}: the state
+   *  Ma: the first 128-bit block to be absorbed
 
-   Steps: ~~~ S'0 = AESRound(S7, S0 ^ Ma) S'1 = AESRound(S0, S1); S'2 =
-   AESRound(S1, S2); S'3 = AESRound(S2, S3); S'4 = AESRound(S3, S4 ^
-   Mb); S'5 = AESRound(S4, S5); S'6 = AESRound(S5, S6); S'7 =
-   AESRound(S6, S7);
+   *  Mb: the second 128-bit block to be absorbed
 
-   S0 = S'0 S1 = S'1 S2 = S'2 S3 = S'3 S4 = S'4 S5 = S'5 S6 = S'6 S7 =
-   S'7 ~~~
+   Modifies:
+
+   *  {S0, ...S7}: the state
+
+   Steps:
+
+   S'0 = AESRound(S7, S0 ^ Ma)
+   S'1 = AESRound(S0, S1);
+   S'2 = AESRound(S1, S2);
+   S'3 = AESRound(S2, S3);
+   S'4 = AESRound(S3, S4 ^ Mb);
+   S'5 = AESRound(S4, S5);
+   S'6 = AESRound(S5, S6);
+   S'7 = AESRound(S6, S7);
+
+   S0  = S'0
+   S1  = S'1
+   S2  = S'2
+   S3  = S'3
+   S4  = S'4
+   S5  = S'5
+   S6  = S'6
+   S7  = S'7
 
 4.2.  The Init Function
 
@@ -217,14 +234,28 @@ Table of Contents
 
    Init(k, iv)
 
-   Inputs: - k: the 128-bit encryption key - iv: the 128-bit nonce
+   Inputs:
 
-   Defines: - {S0, ...S7}: the initial state
+   *  k: the 128-bit encryption key
 
-   Steps: ~~~ S0 = k ^ iv S1 = C1 S2 = C0 S3 = C1 S4 = k ^ iv S5 = k ^
-   C0 S6 = k ^ C1 S7 = k ^ C0
+   *  iv: the 128-bit nonce
 
-   Repeat(10, Update(iv, k)) ~~~
+   Defines:
+
+   *  {S0, ...S7}: the initial state
+
+   Steps:
+
+   S0 = k ^ iv
+   S1 = C1
+   S2 = C0
+   S3 = C1
+   S4 = k ^ iv
+   S5 = k ^ C0
+   S6 = k ^ C1
+   S7 = k ^ C0
+
+   Repeat(10, Update(iv, k))
 
 4.3.  The Enc Function
 
@@ -233,30 +264,50 @@ Table of Contents
 
    Enc(xi)
 
-   Inputs: - xi: the 256-bit encrypted input block
+   Inputs:
 
-   Outputs: - ci: the 256-bit decrypted output block
+   *  xi: the 256-bit encrypted input block
 
-   Steps: ~~~ z0 = S6 ^ S1 ^ (S2 & S3) z1 = S2 ^ S5 ^ (S6 & S7)
+   Outputs:
 
-   t0, t1 = Split(xi, 128) out0 = t0 ^ z0 out1 = t1 ^ z1
+   *  ci: the 256-bit decrypted output block
 
-   Update(t0, t1) ci = out0 || out1 ~~~
+   Steps:
+
+   z0 = S6 ^ S1 ^ (S2 & S3)
+   z1 = S2 ^ S5 ^ (S6 & S7)
+
+   t0, t1 = Split(xi, 128)
+   out0 = t0 ^ z0
+   out1 = t1 ^ z1
+
+   Update(t0, t1)
+   ci = out0 || out1
 
 4.4.  The Dec Function
 
    The Dec function decrypts a 256-bit input block ci using the state
    {S0, ...S7}.
 
-   Inputs: - ci: the 256-bit encrypted input block
+   Inputs:
 
-   Outputs: - xi: the 256-bit decrypted output block
+   *  ci: the 256-bit encrypted input block
 
-   Steps: ~~~ z0 = S6 ^ S1 ^ (S2 & S3) z1 = S2 ^ S5 ^ (S6 & S7)
+   Outputs:
 
-   t0, t1 = Split(ci, 128) out0 = t0 ^ z0 out1 = t1 ^ z1
+   *  xi: the 256-bit decrypted output block
 
-   Update(out0, out1) xi = out0 || out1 ~~~
+   Steps:
+
+   z0 = S6 ^ S1 ^ (S2 & S3)
+   z1 = S2 ^ S5 ^ (S6 & S7)
+
+   t0, t1 = Split(ci, 128)
+   out0 = t0 ^ z0
+   out1 = t1 ^ z1
+
+   Update(out0, out1)
+   xi = out0 || out1
 
 4.5.  The Finalize Function
 
@@ -265,16 +316,23 @@ Table of Contents
 
    Finalize(adlen, mlen)
 
-   Inputs: - adlen: the length of the associated data in bits - mlen:
-   the length of the message in bits
+   Inputs:
 
-   Outputs: - tag: the 128-bit authentication tag
+   *  adlen: the length of the associated data in bits
 
-   Steps: ~~~ t = S2 ^ (LE64(adlen) || LE64(mlen))
+   *  mlen: the length of the message in bits
+
+   Outputs:
+
+   *  tag: the 128-bit authentication tag
+
+   Steps:
+
+   t = S2 ^ (LE64(adlen) || LE64(mlen))
 
    Repeat(7, Update(t, t))
 
-   tag = S0 ^ S1 ^ S2 ^ S3 ^ S4 ^ S5 ^ S6 ~~~
+   tag = S0 ^ S1 ^ S2 ^ S3 ^ S4 ^ S5 ^ S6
 
 4.6.  Authenticated Encryption
 
@@ -284,21 +342,37 @@ Table of Contents
 
    Encrypt(m, ad, k, iv)
 
-   Inputs: - m: the message to be encrypted - ad: the associated data to
-   authenticate - k: the encryption key - iv: the public nonce
+   Inputs:
 
-   Outputs: - c: the ciphertext - tag: the 128-bit authentication tag
+   *  m: the message to be encrypted
 
-   Steps: ~~~ Init(k, iv)
+   *  ad: the associated data to authenticate
+
+   *  k: the encryption key
+
+   *  iv: the public nonce
+
+   Outputs:
+
+   *  c: the ciphertext
+
+   *  tag: the 128-bit authentication tag
+
+   Steps:
+
+   Init(k, iv)
 
    c = {}
 
-   ad_blocks = Split(Pad(ad, 256), 256) for xi in ad_blocks: Enc(xi)
+   ad_blocks = Split(Pad(ad, 256), 256)
+   for xi in ad_blocks:
+       Enc(xi)
 
-   m_blocks = Split(Pad(m, 256), 256) for xi in m_blocks: c = c ||
-   Enc(xi)
+   m_blocks = Split(Pad(m, 256), 256)
+   for xi in m_blocks:
+       c = c || Enc(xi)
 
-   tag = Finalize(|ad|, |m|) ~~~
+   tag = Finalize(|ad|, |m|)
 
 4.7.  Authenticated Decryption
 
@@ -308,22 +382,37 @@ Table of Contents
 
    Decrypt(c, tag, ad, k, iv)
 
-   Inputs: - c: the ciphertext to be decrypted - ad: the associated data
-   to authenticate - k: the encryption key - iv: the public nonce
+   Inputs:
 
-   Outputs: - either m: the message, or an error indicating that the
-   authentication tag is invalid for the given inputs.
+   *  c: the ciphertext to be decrypted
 
-   Steps: ~~~ Init(k, iv)
+   *  ad: the associated data to authenticate
+
+   *  k: the encryption key
+
+   *  iv: the public nonce
+
+   Outputs:
+
+   *  either m: the message, or an error indicating that the
+      authentication tag is invalid for the given inputs.
+
+   Steps:
+
+   Init(k, iv)
 
    m = {}
 
-   ad_blocks = Split(Pad(ad, 256), 256) for xi in ad_blocks: Enc(xi)
+   ad_blocks = Split(Pad(ad, 256), 256)
+   for xi in ad_blocks:
+       Enc(xi)
 
-   c_blocks = Split(Pad(c, 256), 256) for xi in c_blocks: m = m ||
-   Dec(xi)
+   c_blocks = Split(Pad(c, 256), 256)
+   for xi in c_blocks:
+       m = m || Dec(xi)
 
-   m = Truncate(m, |c|) expected_tag = Finalize(|ad|, |m|) ~~~
+   m = Truncate(m, |c|)
+   expected_tag = Finalize(|ad|, |m|)
 
    The comparison of the authentication tag tag with the expected tag
    should be done in constant time.
@@ -339,15 +428,29 @@ Table of Contents
 
    Update(M)
 
-   Inputs: - M: the 128-bit block to be absorbed
+   Inputs:
 
-   Modifies: - {S0, ...S5}: the state
+   *  M: the 128-bit block to be absorbed
 
-   Steps: ~~~ S'0 = AESRound(S5, S0 ^ M) S'1 = AESRound(S0, S1); S'2 =
-   AESRound(S1, S2); S'3 = AESRound(S2, S3); S'4 = AESRound(S3, S4); S'5
-   = AESRound(S4, S5);
+   Modifies:
 
-   S0 = S'0 S1 = S'1 S2 = S'2 S3 = S'3 S4 = S'4 S5 = S'5 ~~~
+   *  {S0, ...S5}: the state
+
+   Steps:
+
+   S'0 = AESRound(S5, S0 ^ M)
+   S'1 = AESRound(S0, S1);
+   S'2 = AESRound(S1, S2);
+   S'3 = AESRound(S2, S3);
+   S'4 = AESRound(S3, S4);
+   S'5 = AESRound(S4, S5);
+
+   S0  = S'0
+   S1  = S'1
+   S2  = S'2
+   S3  = S'3
+   S4  = S'4
+   S5  = S'5
 
 5.2.  The Init Function
 
@@ -356,16 +459,34 @@ Table of Contents
 
    Init(k, iv)
 
-   Inputs: - k: the 128-bit encryption key - iv: the 128-bit nonce
+   Inputs:
 
-   Defines: - {S0, ...S5}: the initial state
+   *  k: the 128-bit encryption key
 
-   Steps: ~~~ k0, k1 = Split(k, 128) iv0, iv1 = Split(iv, 128)
+   *  iv: the 128-bit nonce
 
-   S0 = k0 ^ iv0 S1 = k1 ^ iv1 S2 = C1 S3 = C0 S4 = k0 ^ C0 S5 = k1 ^ C1
+   Defines:
 
-   Repeat(4, Update(k0) Update(k1) Update(k0 ^ iv0) Update(k1 ^ iv1) )
-   ~~~
+   *  {S0, ...S5}: the initial state
+
+   Steps:
+
+   k0, k1 = Split(k, 128)
+   iv0, iv1 = Split(iv, 128)
+
+   S0 = k0 ^ iv0
+   S1 = k1 ^ iv1
+   S2 = C1
+   S3 = C0
+   S4 = k0 ^ C0
+   S5 = k1 ^ C1
+
+   Repeat(4,
+     Update(k0)
+     Update(k1)
+     Update(k0 ^ iv0)
+     Update(k1 ^ iv1)
+   )
 
 5.3.  The Enc Function
 
@@ -374,30 +495,42 @@ Table of Contents
 
    Enc(xi)
 
-   Inputs: - xi: the 128-bit encrypted input block
+   Inputs:
 
-   Outputs: - ci: the 128-bit decrypted output block
+   *  xi: the 128-bit encrypted input block
 
-   Steps: ~~~ z = S1 ^ S4 ^ S5 ^ (S2 & S3)
+   Outputs:
+
+   *  ci: the 128-bit decrypted output block
+
+   Steps:
+
+   z = S1 ^ S4 ^ S5 ^ (S2 & S3)
 
    ci = xi ^ z
 
-   Update(xi) ~~~
+   Update(xi)
 
 5.4.  The Dec Function
 
    The Dec function decrypts a 128-bit input block ci using the state
    {S0, ...S5}.
 
-   Inputs: - ci: the 128-bit encrypted input block
+   Inputs:
 
-   Outputs: - xi: the 128-bit decrypted output block
+   *  ci: the 128-bit encrypted input block
 
-   Steps: ~~~ z = S1 ^ S4 ^ S5 ^ (S2 & S3)
+   Outputs:
+
+   *  xi: the 128-bit decrypted output block
+
+   Steps:
+
+   z = S1 ^ S4 ^ S5 ^ (S2 & S3)
 
    xi = ci ^ z
 
-   Update(xi) ~~~
+   Update(xi)
 
    It returns the 128-bit block out.
 
@@ -408,16 +541,23 @@ Table of Contents
 
    Finalize(adlen, mlen)
 
-   Inputs: - adlen: the length of the associated data in bits - mlen:
-   the length of the message in bits
+   Inputs:
 
-   Outputs: - tag: the 128-bit authentication tag
+   *  adlen: the length of the associated data in bits
 
-   Steps: ~~~ t = S3 ^ (LE64(adlen) || LE64(mlen))
+   *  mlen: the length of the message in bits
+
+   Outputs:
+
+   *  tag: the 128-bit authentication tag
+
+   Steps:
+
+   t = S3 ^ (LE64(adlen) || LE64(mlen))
 
    Repeat(7, Update(t))
 
-   tag = S0 ^ S1 ^ S2 ^ S3 ^ S4 ^ S5 ~~~
+   tag = S0 ^ S1 ^ S2 ^ S3 ^ S4 ^ S5
 
 5.6.  Authenticated Encryption
 
@@ -427,21 +567,37 @@ Table of Contents
 
    Encrypt(m, ad, k, iv)
 
-   Inputs: - m: the message to be encrypted - ad: the associated data to
-   authenticate - k: the encryption key - iv: the public nonce
+   Inputs:
 
-   Outputs: - c: the ciphertext - tag: the 128-bit authentication tag
+   *  m: the message to be encrypted
 
-   Steps: ~~~ Init(k, iv)
+   *  ad: the associated data to authenticate
+
+   *  k: the encryption key
+
+   *  iv: the public nonce
+
+   Outputs:
+
+   *  c: the ciphertext
+
+   *  tag: the 128-bit authentication tag
+
+   Steps:
+
+   Init(k, iv)
 
    c = {}
 
-   ad_blocks = Split(Pad(ad, 128), 128) for xi in ad_blocks: Enc(xi)
+   ad_blocks = Split(Pad(ad, 128), 128)
+   for xi in ad_blocks:
+       Enc(xi)
 
-   m_blocks = Split(Pad(m, 128), 128) for xi in m_blocks: c = c ||
-   Enc(xi)
+   m_blocks = Split(Pad(m, 128), 128)
+   for xi in m_blocks:
+       c = c || Enc(xi)
 
-   tag = Finalize(|ad|, |m|) ~~~
+   tag = Finalize(|ad|, |m|)
 
 5.7.  Authenticated Decryption
 
@@ -451,22 +607,37 @@ Table of Contents
 
    Decrypt(c, tag, ad, k, iv)
 
-   Inputs: - c: the ciphertext to be decrypted - ad: the associated data
-   to authenticate - k: the encryption key - iv: the public nonce
+   Inputs:
 
-   Outputs: - either m: the message, or an error indicating that the
-   authentication tag is invalid for the given inputs.
+   *  c: the ciphertext to be decrypted
 
-   Steps: ~~~ Init(k, iv)
+   *  ad: the associated data to authenticate
+
+   *  k: the encryption key
+
+   *  iv: the public nonce
+
+   Outputs:
+
+   *  either m: the message, or an error indicating that the
+      authentication tag is invalid for the given inputs.
+
+   Steps:
+
+   Init(k, iv)
 
    m = {}
 
-   ad_blocks = Split(Pad(ad, 128), 128) for xi in ad_blocks: Enc(xi)
+   ad_blocks = Split(Pad(ad, 128), 128)
+   for xi in ad_blocks:
+       Enc(xi)
 
-   c_blocks = Split(Pad(c, 128), 128) for xi in c_blocks: m = m ||
-   Dec(xi)
+   c_blocks = Split(Pad(c, 128), 128)
+   for xi in c_blocks:
+       m = m || Dec(xi)
 
-   m = Truncate(m, |c|) expected_tag = Finalize(|ad|, |m|) ~~~
+   m = Truncate(m, |c|)
+   expected_tag = Finalize(|ad|, |m|)
 
    The comparison of the authentication tag tag with the expected tag
    should be done in constant time.

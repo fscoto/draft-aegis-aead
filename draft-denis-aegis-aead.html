@@ -1391,13 +1391,24 @@ It updates the state <code>{S0, ...S7}</code> using two 128-bit values.<a href="
 Update(Ma, Mb)
 </pre><a href="#section-4.1-2" class="pilcrow">¶</a>
 </div>
-<p id="section-4.1-3">Inputs:
-- <code>Ma</code>: the first 128-bit block to be absorbed
-- <code>Mb</code>: the second 128-bit block to be absorbed<a href="#section-4.1-3" class="pilcrow">¶</a></p>
-<p id="section-4.1-4">Modifies:
-- <code>{S0, ...S7}</code>: the state<a href="#section-4.1-4" class="pilcrow">¶</a></p>
-<p id="section-4.1-5">Steps:
-~~~
+<p id="section-4.1-3">Inputs:<a href="#section-4.1-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.1-4.1">
+            <code>Ma</code>: the first 128-bit block to be absorbed<a href="#section-4.1-4.1" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-4.1-4.2">
+            <code>Mb</code>: the second 128-bit block to be absorbed<a href="#section-4.1-4.2" class="pilcrow">¶</a>
+</li>
+        </ul>
+<p id="section-4.1-5">Modifies:<a href="#section-4.1-5" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.1-6.1">
+            <code>{S0, ...S7}</code>: the state<a href="#section-4.1-6.1" class="pilcrow">¶</a>
+</li>
+        </ul>
+<p id="section-4.1-7">Steps:<a href="#section-4.1-7" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-4.1-8">
+<pre>
 S'0 = AESRound(S7, S0 ^ Ma)
 S'1 = AESRound(S0, S1);
 S'2 = AESRound(S1, S2);
@@ -1405,8 +1416,9 @@ S'3 = AESRound(S2, S3);
 S'4 = AESRound(S3, S4 ^ Mb);
 S'5 = AESRound(S4, S5);
 S'6 = AESRound(S5, S6);
-S'7 = AESRound(S6, S7);<a href="#section-4.1-5" class="pilcrow">¶</a></p>
-<p id="section-4.1-6">S0  = S'0
+S'7 = AESRound(S6, S7);
+
+S0  = S'0
 S1  = S'1
 S2  = S'2
 S3  = S'3
@@ -1414,7 +1426,8 @@ S4  = S'4
 S5  = S'5
 S6  = S'6
 S7  = S'7
-~~~<a href="#section-4.1-6" class="pilcrow">¶</a></p>
+</pre><a href="#section-4.1-8" class="pilcrow">¶</a>
+</div>
 </section>
 </div>
 <div id="the-init-function">
@@ -1428,13 +1441,24 @@ S7  = S'7
 Init(k, iv)
 </pre><a href="#section-4.2-2" class="pilcrow">¶</a>
 </div>
-<p id="section-4.2-3">Inputs:
-- <code>k</code>: the 128-bit encryption key
-- <code>iv</code>: the 128-bit nonce<a href="#section-4.2-3" class="pilcrow">¶</a></p>
-<p id="section-4.2-4">Defines:
-- <code>{S0, ...S7}</code>: the initial state<a href="#section-4.2-4" class="pilcrow">¶</a></p>
-<p id="section-4.2-5">Steps:
-~~~
+<p id="section-4.2-3">Inputs:<a href="#section-4.2-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.2-4.1">
+            <code>k</code>: the 128-bit encryption key<a href="#section-4.2-4.1" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-4.2-4.2">
+            <code>iv</code>: the 128-bit nonce<a href="#section-4.2-4.2" class="pilcrow">¶</a>
+</li>
+        </ul>
+<p id="section-4.2-5">Defines:<a href="#section-4.2-5" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.2-6.1">
+            <code>{S0, ...S7}</code>: the initial state<a href="#section-4.2-6.1" class="pilcrow">¶</a>
+</li>
+        </ul>
+<p id="section-4.2-7">Steps:<a href="#section-4.2-7" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-4.2-8">
+<pre>
 S0 = k ^ iv
 S1 = C1
 S2 = C0
@@ -1442,9 +1466,11 @@ S3 = C1
 S4 = k ^ iv
 S5 = k ^ C0
 S6 = k ^ C1
-S7 = k ^ C0<a href="#section-4.2-5" class="pilcrow">¶</a></p>
-<p id="section-4.2-6">Repeat(10, Update(iv, k))
-~~~<a href="#section-4.2-6" class="pilcrow">¶</a></p>
+S7 = k ^ C0
+
+Repeat(10, Update(iv, k))
+</pre><a href="#section-4.2-8" class="pilcrow">¶</a>
+</div>
 </section>
 </div>
 <div id="the-enc-function">
@@ -1458,20 +1484,32 @@ S7 = k ^ C0<a href="#section-4.2-5" class="pilcrow">¶</a></p>
 Enc(xi)
 </pre><a href="#section-4.3-2" class="pilcrow">¶</a>
 </div>
-<p id="section-4.3-3">Inputs:
-- <code>xi</code>: the 256-bit encrypted input block<a href="#section-4.3-3" class="pilcrow">¶</a></p>
-<p id="section-4.3-4">Outputs:
-- <code>ci</code>: the 256-bit decrypted output block<a href="#section-4.3-4" class="pilcrow">¶</a></p>
-<p id="section-4.3-5">Steps:
-~~~
+<p id="section-4.3-3">Inputs:<a href="#section-4.3-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.3-4.1">
+            <code>xi</code>: the 256-bit encrypted input block<a href="#section-4.3-4.1" class="pilcrow">¶</a>
+</li>
+        </ul>
+<p id="section-4.3-5">Outputs:<a href="#section-4.3-5" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.3-6.1">
+            <code>ci</code>: the 256-bit decrypted output block<a href="#section-4.3-6.1" class="pilcrow">¶</a>
+</li>
+        </ul>
+<p id="section-4.3-7">Steps:<a href="#section-4.3-7" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-4.3-8">
+<pre>
 z0 = S6 ^ S1 ^ (S2 &amp; S3)
-z1 = S2 ^ S5 ^ (S6 &amp; S7)<a href="#section-4.3-5" class="pilcrow">¶</a></p>
-<p id="section-4.3-6">t0, t1 = Split(xi, 128)
+z1 = S2 ^ S5 ^ (S6 &amp; S7)
+
+t0, t1 = Split(xi, 128)
 out0 = t0 ^ z0
-out1 = t1 ^ z1<a href="#section-4.3-6" class="pilcrow">¶</a></p>
-<p id="section-4.3-7">Update(t0, t1)
+out1 = t1 ^ z1
+
+Update(t0, t1)
 ci = out0 || out1
-~~~<a href="#section-4.3-7" class="pilcrow">¶</a></p>
+</pre><a href="#section-4.3-8" class="pilcrow">¶</a>
+</div>
 </section>
 </div>
 <div id="the-dec-function">
@@ -1480,20 +1518,32 @@ ci = out0 || out1
 <a href="#section-4.4" class="section-number selfRef">4.4. </a><a href="#name-the-dec-function" class="section-name selfRef">The Dec Function</a>
         </h3>
 <p id="section-4.4-1">The <code>Dec</code> function decrypts a 256-bit input block <code>ci</code> using the state <code>{S0, ...S7}</code>.<a href="#section-4.4-1" class="pilcrow">¶</a></p>
-<p id="section-4.4-2">Inputs:
-- <code>ci</code>: the 256-bit encrypted input block<a href="#section-4.4-2" class="pilcrow">¶</a></p>
-<p id="section-4.4-3">Outputs:
-- <code>xi</code>: the 256-bit decrypted output block<a href="#section-4.4-3" class="pilcrow">¶</a></p>
-<p id="section-4.4-4">Steps:
-~~~
+<p id="section-4.4-2">Inputs:<a href="#section-4.4-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.4-3.1">
+            <code>ci</code>: the 256-bit encrypted input block<a href="#section-4.4-3.1" class="pilcrow">¶</a>
+</li>
+        </ul>
+<p id="section-4.4-4">Outputs:<a href="#section-4.4-4" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.4-5.1">
+            <code>xi</code>: the 256-bit decrypted output block<a href="#section-4.4-5.1" class="pilcrow">¶</a>
+</li>
+        </ul>
+<p id="section-4.4-6">Steps:<a href="#section-4.4-6" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-4.4-7">
+<pre>
 z0 = S6 ^ S1 ^ (S2 &amp; S3)
-z1 = S2 ^ S5 ^ (S6 &amp; S7)<a href="#section-4.4-4" class="pilcrow">¶</a></p>
-<p id="section-4.4-5">t0, t1 = Split(ci, 128)
+z1 = S2 ^ S5 ^ (S6 &amp; S7)
+
+t0, t1 = Split(ci, 128)
 out0 = t0 ^ z0
-out1 = t1 ^ z1<a href="#section-4.4-5" class="pilcrow">¶</a></p>
-<p id="section-4.4-6">Update(out0, out1)
+out1 = t1 ^ z1
+
+Update(out0, out1)
 xi = out0 || out1
-~~~<a href="#section-4.4-6" class="pilcrow">¶</a></p>
+</pre><a href="#section-4.4-7" class="pilcrow">¶</a>
+</div>
 </section>
 </div>
 <div id="the-finalize-function">
@@ -1507,17 +1557,31 @@ xi = out0 || out1
 Finalize(adlen, mlen)
 </pre><a href="#section-4.5-2" class="pilcrow">¶</a>
 </div>
-<p id="section-4.5-3">Inputs:
-- <code>adlen</code>: the length of the associated data in bits
-- <code>mlen</code>: the length of the message in bits<a href="#section-4.5-3" class="pilcrow">¶</a></p>
-<p id="section-4.5-4">Outputs:
-- <code>tag</code>: the 128-bit authentication tag<a href="#section-4.5-4" class="pilcrow">¶</a></p>
-<p id="section-4.5-5">Steps:
-~~~
-t = S2 ^ (LE64(adlen) || LE64(mlen))<a href="#section-4.5-5" class="pilcrow">¶</a></p>
-<p id="section-4.5-6">Repeat(7, Update(t, t))<a href="#section-4.5-6" class="pilcrow">¶</a></p>
-<p id="section-4.5-7">tag = S0 ^ S1 ^ S2 ^ S3 ^ S4 ^ S5 ^ S6
-~~~<a href="#section-4.5-7" class="pilcrow">¶</a></p>
+<p id="section-4.5-3">Inputs:<a href="#section-4.5-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.5-4.1">
+            <code>adlen</code>: the length of the associated data in bits<a href="#section-4.5-4.1" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-4.5-4.2">
+            <code>mlen</code>: the length of the message in bits<a href="#section-4.5-4.2" class="pilcrow">¶</a>
+</li>
+        </ul>
+<p id="section-4.5-5">Outputs:<a href="#section-4.5-5" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.5-6.1">
+            <code>tag</code>: the 128-bit authentication tag<a href="#section-4.5-6.1" class="pilcrow">¶</a>
+</li>
+        </ul>
+<p id="section-4.5-7">Steps:<a href="#section-4.5-7" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-4.5-8">
+<pre>
+t = S2 ^ (LE64(adlen) || LE64(mlen))
+
+Repeat(7, Update(t, t))
+
+tag = S0 ^ S1 ^ S2 ^ S3 ^ S4 ^ S5 ^ S6
+</pre><a href="#section-4.5-8" class="pilcrow">¶</a>
+</div>
 </section>
 </div>
 <div id="authenticated-encryption">
@@ -1531,26 +1595,48 @@ t = S2 ^ (LE64(adlen) || LE64(mlen))<a href="#section-4.5-5" class="pilcrow">¶<
 Encrypt(m, ad, k, iv)
 </pre><a href="#section-4.6-2" class="pilcrow">¶</a>
 </div>
-<p id="section-4.6-3">Inputs:
-- <code>m</code>: the message to be encrypted
-- <code>ad</code>: the associated data to authenticate
-- <code>k</code>: the encryption key
-- <code>iv</code>: the public nonce<a href="#section-4.6-3" class="pilcrow">¶</a></p>
-<p id="section-4.6-4">Outputs:
-- <code>c</code>: the ciphertext
-- <code>tag</code>: the 128-bit authentication tag<a href="#section-4.6-4" class="pilcrow">¶</a></p>
-<p id="section-4.6-5">Steps:
-~~~
-Init(k, iv)<a href="#section-4.6-5" class="pilcrow">¶</a></p>
-<p id="section-4.6-6">c = {}<a href="#section-4.6-6" class="pilcrow">¶</a></p>
-<p id="section-4.6-7">ad_blocks = Split(Pad(ad, 256), 256)
+<p id="section-4.6-3">Inputs:<a href="#section-4.6-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.6-4.1">
+            <code>m</code>: the message to be encrypted<a href="#section-4.6-4.1" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-4.6-4.2">
+            <code>ad</code>: the associated data to authenticate<a href="#section-4.6-4.2" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-4.6-4.3">
+            <code>k</code>: the encryption key<a href="#section-4.6-4.3" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-4.6-4.4">
+            <code>iv</code>: the public nonce<a href="#section-4.6-4.4" class="pilcrow">¶</a>
+</li>
+        </ul>
+<p id="section-4.6-5">Outputs:<a href="#section-4.6-5" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.6-6.1">
+            <code>c</code>: the ciphertext<a href="#section-4.6-6.1" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-4.6-6.2">
+            <code>tag</code>: the 128-bit authentication tag<a href="#section-4.6-6.2" class="pilcrow">¶</a>
+</li>
+        </ul>
+<p id="section-4.6-7">Steps:<a href="#section-4.6-7" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-4.6-8">
+<pre>
+Init(k, iv)
+
+c = {}
+
+ad_blocks = Split(Pad(ad, 256), 256)
 for xi in ad_blocks:
-    Enc(xi)<a href="#section-4.6-7" class="pilcrow">¶</a></p>
-<p id="section-4.6-8">m_blocks = Split(Pad(m, 256), 256)
+    Enc(xi)
+
+m_blocks = Split(Pad(m, 256), 256)
 for xi in m_blocks:
-    c = c || Enc(xi)<a href="#section-4.6-8" class="pilcrow">¶</a></p>
-<p id="section-4.6-9">tag = Finalize(|ad|, |m|)
-~~~<a href="#section-4.6-9" class="pilcrow">¶</a></p>
+    c = c || Enc(xi)
+
+tag = Finalize(|ad|, |m|)
+</pre><a href="#section-4.6-8" class="pilcrow">¶</a>
+</div>
 </section>
 </div>
 <div id="authenticated-decryption">
@@ -1564,27 +1650,46 @@ for xi in m_blocks:
 Decrypt(c, tag, ad, k, iv)
 </pre><a href="#section-4.7-2" class="pilcrow">¶</a>
 </div>
-<p id="section-4.7-3">Inputs:
-- <code>c</code>: the ciphertext to be decrypted
-- <code>ad</code>: the associated data to authenticate
-- <code>k</code>: the encryption key
-- <code>iv</code>: the public nonce<a href="#section-4.7-3" class="pilcrow">¶</a></p>
-<p id="section-4.7-4">Outputs:
-- either <code>m</code>: the message, or an error indicating that the authentication tag is invalid for the given inputs.<a href="#section-4.7-4" class="pilcrow">¶</a></p>
-<p id="section-4.7-5">Steps:
-~~~
-Init(k, iv)<a href="#section-4.7-5" class="pilcrow">¶</a></p>
-<p id="section-4.7-6">m = {}<a href="#section-4.7-6" class="pilcrow">¶</a></p>
-<p id="section-4.7-7">ad_blocks = Split(Pad(ad, 256), 256)
+<p id="section-4.7-3">Inputs:<a href="#section-4.7-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.7-4.1">
+            <code>c</code>: the ciphertext to be decrypted<a href="#section-4.7-4.1" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-4.7-4.2">
+            <code>ad</code>: the associated data to authenticate<a href="#section-4.7-4.2" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-4.7-4.3">
+            <code>k</code>: the encryption key<a href="#section-4.7-4.3" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-4.7-4.4">
+            <code>iv</code>: the public nonce<a href="#section-4.7-4.4" class="pilcrow">¶</a>
+</li>
+        </ul>
+<p id="section-4.7-5">Outputs:<a href="#section-4.7-5" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.7-6.1">either <code>m</code>: the message, or an error indicating that the authentication tag is invalid for the given inputs.<a href="#section-4.7-6.1" class="pilcrow">¶</a>
+</li>
+        </ul>
+<p id="section-4.7-7">Steps:<a href="#section-4.7-7" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-4.7-8">
+<pre>
+Init(k, iv)
+
+m = {}
+
+ad_blocks = Split(Pad(ad, 256), 256)
 for xi in ad_blocks:
-    Enc(xi)<a href="#section-4.7-7" class="pilcrow">¶</a></p>
-<p id="section-4.7-8">c_blocks = Split(Pad(c, 256), 256)
+    Enc(xi)
+
+c_blocks = Split(Pad(c, 256), 256)
 for xi in c_blocks:
-    m = m || Dec(xi)<a href="#section-4.7-8" class="pilcrow">¶</a></p>
-<p id="section-4.7-9">m = Truncate(m, |c|)
+    m = m || Dec(xi)
+
+m = Truncate(m, |c|)
 expected_tag = Finalize(|ad|, |m|)
-~~~<a href="#section-4.7-9" class="pilcrow">¶</a></p>
-<p id="section-4.7-10">The comparison of the authentication tag <code>tag</code> with the expected tag should be done in constant time.<a href="#section-4.7-10" class="pilcrow">¶</a></p>
+</pre><a href="#section-4.7-8" class="pilcrow">¶</a>
+</div>
+<p id="section-4.7-9">The comparison of the authentication tag <code>tag</code> with the expected tag should be done in constant time.<a href="#section-4.7-9" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1607,25 +1712,36 @@ It updates the state <code>{S0, ...S5}</code> using a 128-bit value.<a href="#se
 Update(M)
 </pre><a href="#section-5.1-2" class="pilcrow">¶</a>
 </div>
-<p id="section-5.1-3">Inputs:
-- <code>M</code>: the 128-bit block to be absorbed<a href="#section-5.1-3" class="pilcrow">¶</a></p>
-<p id="section-5.1-4">Modifies:
-- <code>{S0, ...S5}</code>: the state<a href="#section-5.1-4" class="pilcrow">¶</a></p>
-<p id="section-5.1-5">Steps:
-~~~
+<p id="section-5.1-3">Inputs:<a href="#section-5.1-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.1-4.1">
+            <code>M</code>: the 128-bit block to be absorbed<a href="#section-5.1-4.1" class="pilcrow">¶</a>
+</li>
+        </ul>
+<p id="section-5.1-5">Modifies:<a href="#section-5.1-5" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.1-6.1">
+            <code>{S0, ...S5}</code>: the state<a href="#section-5.1-6.1" class="pilcrow">¶</a>
+</li>
+        </ul>
+<p id="section-5.1-7">Steps:<a href="#section-5.1-7" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-5.1-8">
+<pre>
 S'0 = AESRound(S5, S0 ^ M)
 S'1 = AESRound(S0, S1);
 S'2 = AESRound(S1, S2);
 S'3 = AESRound(S2, S3);
 S'4 = AESRound(S3, S4);
-S'5 = AESRound(S4, S5);<a href="#section-5.1-5" class="pilcrow">¶</a></p>
-<p id="section-5.1-6">S0  = S'0
+S'5 = AESRound(S4, S5);
+
+S0  = S'0
 S1  = S'1
 S2  = S'2
 S3  = S'3
 S4  = S'4
 S5  = S'5
-~~~<a href="#section-5.1-6" class="pilcrow">¶</a></p>
+</pre><a href="#section-5.1-8" class="pilcrow">¶</a>
+</div>
 </section>
 </div>
 <div id="the-init-function-1">
@@ -1639,28 +1755,42 @@ S5  = S'5
 Init(k, iv)
 </pre><a href="#section-5.2-2" class="pilcrow">¶</a>
 </div>
-<p id="section-5.2-3">Inputs:
-- <code>k</code>: the 128-bit encryption key
-- <code>iv</code>: the 128-bit nonce<a href="#section-5.2-3" class="pilcrow">¶</a></p>
-<p id="section-5.2-4">Defines:
-- <code>{S0, ...S5}</code>: the initial state<a href="#section-5.2-4" class="pilcrow">¶</a></p>
-<p id="section-5.2-5">Steps:
-~~~
+<p id="section-5.2-3">Inputs:<a href="#section-5.2-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.2-4.1">
+            <code>k</code>: the 128-bit encryption key<a href="#section-5.2-4.1" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-5.2-4.2">
+            <code>iv</code>: the 128-bit nonce<a href="#section-5.2-4.2" class="pilcrow">¶</a>
+</li>
+        </ul>
+<p id="section-5.2-5">Defines:<a href="#section-5.2-5" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.2-6.1">
+            <code>{S0, ...S5}</code>: the initial state<a href="#section-5.2-6.1" class="pilcrow">¶</a>
+</li>
+        </ul>
+<p id="section-5.2-7">Steps:<a href="#section-5.2-7" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-5.2-8">
+<pre>
 k0, k1 = Split(k, 128)
-iv0, iv1 = Split(iv, 128)<a href="#section-5.2-5" class="pilcrow">¶</a></p>
-<p id="section-5.2-6">S0 = k0 ^ iv0
+iv0, iv1 = Split(iv, 128)
+
+S0 = k0 ^ iv0
 S1 = k1 ^ iv1
 S2 = C1
 S3 = C0
 S4 = k0 ^ C0
-S5 = k1 ^ C1<a href="#section-5.2-6" class="pilcrow">¶</a></p>
-<p id="section-5.2-7">Repeat(4,
+S5 = k1 ^ C1
+
+Repeat(4,
   Update(k0)
   Update(k1)
   Update(k0 ^ iv0)
   Update(k1 ^ iv1)
 )
-~~~<a href="#section-5.2-7" class="pilcrow">¶</a></p>
+</pre><a href="#section-5.2-8" class="pilcrow">¶</a>
+</div>
 </section>
 </div>
 <div id="the-enc-function-1">
@@ -1674,16 +1804,28 @@ S5 = k1 ^ C1<a href="#section-5.2-6" class="pilcrow">¶</a></p>
 Enc(xi)
 </pre><a href="#section-5.3-2" class="pilcrow">¶</a>
 </div>
-<p id="section-5.3-3">Inputs:
-- <code>xi</code>: the 128-bit encrypted input block<a href="#section-5.3-3" class="pilcrow">¶</a></p>
-<p id="section-5.3-4">Outputs:
-- <code>ci</code>: the 128-bit decrypted output block<a href="#section-5.3-4" class="pilcrow">¶</a></p>
-<p id="section-5.3-5">Steps:
-~~~
-z = S1 ^ S4 ^ S5 ^ (S2 &amp; S3)<a href="#section-5.3-5" class="pilcrow">¶</a></p>
-<p id="section-5.3-6">ci = xi ^ z<a href="#section-5.3-6" class="pilcrow">¶</a></p>
-<p id="section-5.3-7">Update(xi)
-~~~<a href="#section-5.3-7" class="pilcrow">¶</a></p>
+<p id="section-5.3-3">Inputs:<a href="#section-5.3-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.3-4.1">
+            <code>xi</code>: the 128-bit encrypted input block<a href="#section-5.3-4.1" class="pilcrow">¶</a>
+</li>
+        </ul>
+<p id="section-5.3-5">Outputs:<a href="#section-5.3-5" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.3-6.1">
+            <code>ci</code>: the 128-bit decrypted output block<a href="#section-5.3-6.1" class="pilcrow">¶</a>
+</li>
+        </ul>
+<p id="section-5.3-7">Steps:<a href="#section-5.3-7" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-5.3-8">
+<pre>
+z = S1 ^ S4 ^ S5 ^ (S2 &amp; S3)
+
+ci = xi ^ z
+
+Update(xi)
+</pre><a href="#section-5.3-8" class="pilcrow">¶</a>
+</div>
 </section>
 </div>
 <div id="the-dec-function-1">
@@ -1692,17 +1834,29 @@ z = S1 ^ S4 ^ S5 ^ (S2 &amp; S3)<a href="#section-5.3-5" class="pilcrow">¶</a><
 <a href="#section-5.4" class="section-number selfRef">5.4. </a><a href="#name-the-dec-function-2" class="section-name selfRef">The Dec Function</a>
         </h3>
 <p id="section-5.4-1">The <code>Dec</code> function decrypts a 128-bit input block <code>ci</code> using the state <code>{S0, ...S5}</code>.<a href="#section-5.4-1" class="pilcrow">¶</a></p>
-<p id="section-5.4-2">Inputs:
-- <code>ci</code>: the 128-bit encrypted input block<a href="#section-5.4-2" class="pilcrow">¶</a></p>
-<p id="section-5.4-3">Outputs:
-- <code>xi</code>: the 128-bit decrypted output block<a href="#section-5.4-3" class="pilcrow">¶</a></p>
-<p id="section-5.4-4">Steps:
-~~~
-z = S1 ^ S4 ^ S5 ^ (S2 &amp; S3)<a href="#section-5.4-4" class="pilcrow">¶</a></p>
-<p id="section-5.4-5">xi = ci ^ z<a href="#section-5.4-5" class="pilcrow">¶</a></p>
-<p id="section-5.4-6">Update(xi)
-~~~<a href="#section-5.4-6" class="pilcrow">¶</a></p>
-<p id="section-5.4-7">It returns the 128-bit block <code>out</code>.<a href="#section-5.4-7" class="pilcrow">¶</a></p>
+<p id="section-5.4-2">Inputs:<a href="#section-5.4-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.4-3.1">
+            <code>ci</code>: the 128-bit encrypted input block<a href="#section-5.4-3.1" class="pilcrow">¶</a>
+</li>
+        </ul>
+<p id="section-5.4-4">Outputs:<a href="#section-5.4-4" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.4-5.1">
+            <code>xi</code>: the 128-bit decrypted output block<a href="#section-5.4-5.1" class="pilcrow">¶</a>
+</li>
+        </ul>
+<p id="section-5.4-6">Steps:<a href="#section-5.4-6" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-5.4-7">
+<pre>
+z = S1 ^ S4 ^ S5 ^ (S2 &amp; S3)
+
+xi = ci ^ z
+
+Update(xi)
+</pre><a href="#section-5.4-7" class="pilcrow">¶</a>
+</div>
+<p id="section-5.4-8">It returns the 128-bit block <code>out</code>.<a href="#section-5.4-8" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="the-finalize-function-1">
@@ -1716,17 +1870,31 @@ z = S1 ^ S4 ^ S5 ^ (S2 &amp; S3)<a href="#section-5.4-4" class="pilcrow">¶</a><
 Finalize(adlen, mlen)
 </pre><a href="#section-5.5-2" class="pilcrow">¶</a>
 </div>
-<p id="section-5.5-3">Inputs:
-- <code>adlen</code>: the length of the associated data in bits
-- <code>mlen</code>: the length of the message in bits<a href="#section-5.5-3" class="pilcrow">¶</a></p>
-<p id="section-5.5-4">Outputs:
-- <code>tag</code>: the 128-bit authentication tag<a href="#section-5.5-4" class="pilcrow">¶</a></p>
-<p id="section-5.5-5">Steps:
-~~~
-t = S3 ^ (LE64(adlen) || LE64(mlen))<a href="#section-5.5-5" class="pilcrow">¶</a></p>
-<p id="section-5.5-6">Repeat(7, Update(t))<a href="#section-5.5-6" class="pilcrow">¶</a></p>
-<p id="section-5.5-7">tag = S0 ^ S1 ^ S2 ^ S3 ^ S4 ^ S5
-~~~<a href="#section-5.5-7" class="pilcrow">¶</a></p>
+<p id="section-5.5-3">Inputs:<a href="#section-5.5-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.5-4.1">
+            <code>adlen</code>: the length of the associated data in bits<a href="#section-5.5-4.1" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-5.5-4.2">
+            <code>mlen</code>: the length of the message in bits<a href="#section-5.5-4.2" class="pilcrow">¶</a>
+</li>
+        </ul>
+<p id="section-5.5-5">Outputs:<a href="#section-5.5-5" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.5-6.1">
+            <code>tag</code>: the 128-bit authentication tag<a href="#section-5.5-6.1" class="pilcrow">¶</a>
+</li>
+        </ul>
+<p id="section-5.5-7">Steps:<a href="#section-5.5-7" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-5.5-8">
+<pre>
+t = S3 ^ (LE64(adlen) || LE64(mlen))
+
+Repeat(7, Update(t))
+
+tag = S0 ^ S1 ^ S2 ^ S3 ^ S4 ^ S5
+</pre><a href="#section-5.5-8" class="pilcrow">¶</a>
+</div>
 </section>
 </div>
 <div id="authenticated-encryption-1">
@@ -1740,26 +1908,48 @@ t = S3 ^ (LE64(adlen) || LE64(mlen))<a href="#section-5.5-5" class="pilcrow">¶<
 Encrypt(m, ad, k, iv)
 </pre><a href="#section-5.6-2" class="pilcrow">¶</a>
 </div>
-<p id="section-5.6-3">Inputs:
-- <code>m</code>: the message to be encrypted
-- <code>ad</code>: the associated data to authenticate
-- <code>k</code>: the encryption key
-- <code>iv</code>: the public nonce<a href="#section-5.6-3" class="pilcrow">¶</a></p>
-<p id="section-5.6-4">Outputs:
-- <code>c</code>: the ciphertext
-- <code>tag</code>: the 128-bit authentication tag<a href="#section-5.6-4" class="pilcrow">¶</a></p>
-<p id="section-5.6-5">Steps:
-~~~
-Init(k, iv)<a href="#section-5.6-5" class="pilcrow">¶</a></p>
-<p id="section-5.6-6">c = {}<a href="#section-5.6-6" class="pilcrow">¶</a></p>
-<p id="section-5.6-7">ad_blocks = Split(Pad(ad, 128), 128)
+<p id="section-5.6-3">Inputs:<a href="#section-5.6-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.6-4.1">
+            <code>m</code>: the message to be encrypted<a href="#section-5.6-4.1" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-5.6-4.2">
+            <code>ad</code>: the associated data to authenticate<a href="#section-5.6-4.2" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-5.6-4.3">
+            <code>k</code>: the encryption key<a href="#section-5.6-4.3" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-5.6-4.4">
+            <code>iv</code>: the public nonce<a href="#section-5.6-4.4" class="pilcrow">¶</a>
+</li>
+        </ul>
+<p id="section-5.6-5">Outputs:<a href="#section-5.6-5" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.6-6.1">
+            <code>c</code>: the ciphertext<a href="#section-5.6-6.1" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-5.6-6.2">
+            <code>tag</code>: the 128-bit authentication tag<a href="#section-5.6-6.2" class="pilcrow">¶</a>
+</li>
+        </ul>
+<p id="section-5.6-7">Steps:<a href="#section-5.6-7" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-5.6-8">
+<pre>
+Init(k, iv)
+
+c = {}
+
+ad_blocks = Split(Pad(ad, 128), 128)
 for xi in ad_blocks:
-    Enc(xi)<a href="#section-5.6-7" class="pilcrow">¶</a></p>
-<p id="section-5.6-8">m_blocks = Split(Pad(m, 128), 128)
+    Enc(xi)
+
+m_blocks = Split(Pad(m, 128), 128)
 for xi in m_blocks:
-    c = c || Enc(xi)<a href="#section-5.6-8" class="pilcrow">¶</a></p>
-<p id="section-5.6-9">tag = Finalize(|ad|, |m|)
-~~~<a href="#section-5.6-9" class="pilcrow">¶</a></p>
+    c = c || Enc(xi)
+
+tag = Finalize(|ad|, |m|)
+</pre><a href="#section-5.6-8" class="pilcrow">¶</a>
+</div>
 </section>
 </div>
 <div id="authenticated-decryption-1">
@@ -1773,27 +1963,46 @@ for xi in m_blocks:
 Decrypt(c, tag, ad, k, iv)
 </pre><a href="#section-5.7-2" class="pilcrow">¶</a>
 </div>
-<p id="section-5.7-3">Inputs:
-- <code>c</code>: the ciphertext to be decrypted
-- <code>ad</code>: the associated data to authenticate
-- <code>k</code>: the encryption key
-- <code>iv</code>: the public nonce<a href="#section-5.7-3" class="pilcrow">¶</a></p>
-<p id="section-5.7-4">Outputs:
-- either <code>m</code>: the message, or an error indicating that the authentication tag is invalid for the given inputs.<a href="#section-5.7-4" class="pilcrow">¶</a></p>
-<p id="section-5.7-5">Steps:
-~~~
-Init(k, iv)<a href="#section-5.7-5" class="pilcrow">¶</a></p>
-<p id="section-5.7-6">m = {}<a href="#section-5.7-6" class="pilcrow">¶</a></p>
-<p id="section-5.7-7">ad_blocks = Split(Pad(ad, 128), 128)
+<p id="section-5.7-3">Inputs:<a href="#section-5.7-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.7-4.1">
+            <code>c</code>: the ciphertext to be decrypted<a href="#section-5.7-4.1" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-5.7-4.2">
+            <code>ad</code>: the associated data to authenticate<a href="#section-5.7-4.2" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-5.7-4.3">
+            <code>k</code>: the encryption key<a href="#section-5.7-4.3" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-5.7-4.4">
+            <code>iv</code>: the public nonce<a href="#section-5.7-4.4" class="pilcrow">¶</a>
+</li>
+        </ul>
+<p id="section-5.7-5">Outputs:<a href="#section-5.7-5" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.7-6.1">either <code>m</code>: the message, or an error indicating that the authentication tag is invalid for the given inputs.<a href="#section-5.7-6.1" class="pilcrow">¶</a>
+</li>
+        </ul>
+<p id="section-5.7-7">Steps:<a href="#section-5.7-7" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-5.7-8">
+<pre>
+Init(k, iv)
+
+m = {}
+
+ad_blocks = Split(Pad(ad, 128), 128)
 for xi in ad_blocks:
-    Enc(xi)<a href="#section-5.7-7" class="pilcrow">¶</a></p>
-<p id="section-5.7-8">c_blocks = Split(Pad(c, 128), 128)
+    Enc(xi)
+
+c_blocks = Split(Pad(c, 128), 128)
 for xi in c_blocks:
-    m = m || Dec(xi)<a href="#section-5.7-8" class="pilcrow">¶</a></p>
-<p id="section-5.7-9">m = Truncate(m, |c|)
+    m = m || Dec(xi)
+
+m = Truncate(m, |c|)
 expected_tag = Finalize(|ad|, |m|)
-~~~<a href="#section-5.7-9" class="pilcrow">¶</a></p>
-<p id="section-5.7-10">The comparison of the authentication tag <code>tag</code> with the expected tag should be done in constant time.<a href="#section-5.7-10" class="pilcrow">¶</a></p>
+</pre><a href="#section-5.7-8" class="pilcrow">¶</a>
+</div>
+<p id="section-5.7-9">The comparison of the authentication tag <code>tag</code> with the expected tag should be done in constant time.<a href="#section-5.7-9" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
