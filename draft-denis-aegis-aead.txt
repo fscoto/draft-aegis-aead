@@ -192,10 +192,10 @@ Table of Contents
 
 4.1.  The Update Function
 
-   Tue Update function is the core of the AEGIS-128L algorithm.  It
-   updates the state {S0, ...S7} using two 128-bit values.
-
    Update(Ma, Mb)
+
+   The Update function is the core of the AEGIS-128L algorithm.  It
+   updates the state {S0, ...S7} using two 128-bit values.
 
    Inputs:
 
@@ -229,10 +229,10 @@ Table of Contents
 
 4.2.  The Init Function
 
+   Init(k, iv)
+
    The Init function constructs the initial state {S0, ...S7} using the
    key k and the nonce iv.
-
-   Init(k, iv)
 
    Inputs:
 
@@ -259,10 +259,10 @@ Table of Contents
 
 4.3.  The Enc Function
 
+   Enc(xi)
+
    The Enc function encrypts a 256-bit input block xi using the state
    {S0, ...S7}.
-
-   Enc(xi)
 
    Inputs:
 
@@ -285,6 +285,8 @@ Table of Contents
    ci = out0 || out1
 
 4.4.  The Dec Function
+
+   Dec(ci)
 
    The Dec function decrypts a 256-bit input block ci using the state
    {S0, ...S7}.
@@ -311,10 +313,10 @@ Table of Contents
 
 4.5.  The Finalize Function
 
+   Finalize(adlen, mlen)
+
    The Finalize function computes a 128-bit tag that authenticate the
    message as well as the associated data.
-
-   Finalize(adlen, mlen)
 
    Inputs:
 
@@ -423,10 +425,10 @@ Table of Contents
 
 5.1.  The Update Function
 
-   Tue Update function is the core of the AEGIS-256 algorithm.  It
-   updates the state {S0, ...S5} using a 128-bit value.
-
    Update(M)
+
+   The Update function is the core of the AEGIS-256 algorithm.  It
+   updates the state {S0, ...S5} using a 128-bit value.
 
    Inputs:
 
@@ -454,10 +456,10 @@ Table of Contents
 
 5.2.  The Init Function
 
+   Init(k, iv)
+
    The Init function constructs the initial state {S0, ...S5} using the
    key k and the nonce iv.
-
-   Init(k, iv)
 
    Inputs:
 
@@ -490,10 +492,10 @@ Table of Contents
 
 5.3.  The Enc Function
 
+   Enc(xi)
+
    The Enc function encrypts a 128-bit input block xi using the state
    {S0, ...S5}.
-
-   Enc(xi)
 
    Inputs:
 
@@ -512,6 +514,8 @@ Table of Contents
    Update(xi)
 
 5.4.  The Dec Function
+
+   Dec(ci)
 
    The Dec function decrypts a 128-bit input block ci using the state
    {S0, ...S5}.
@@ -536,10 +540,10 @@ Table of Contents
 
 5.5.  The Finalize Function
 
+   Finalize(adlen, mlen)
+
    The Finalize function computes a 128-bit tag that authenticate the
    message as well as the associated data.
-
-   Finalize(adlen, mlen)
 
    Inputs:
 
@@ -561,11 +565,11 @@ Table of Contents
 
 5.6.  Authenticated Encryption
 
+   Encrypt(m, ad, k, iv)
+
    The Encrypt function encrypts a message and returns the ciphertext
    along with an authentication tag that verifies the authenticity of
    the message and, optionally, of associated data.
-
-   Encrypt(m, ad, k, iv)
 
    Inputs:
 
