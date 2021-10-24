@@ -9,7 +9,7 @@ Expires: 27 April 2022
 
 
         The AEGIS family of authenticated encryption algorithms
-                        draft-aegis-aead-latest
+                     draft-denis-aegis-aead-latest
 
 Abstract
 
