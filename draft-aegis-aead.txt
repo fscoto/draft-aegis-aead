@@ -121,6 +121,8 @@ Table of Contents
 
 3.  Notation and Conventions
 
+   Primitives:
+
    *  |x|: the length of x in bits
 
    *  a ^ b: the bit-wise exclusive OR operation between a and b
@@ -142,6 +144,10 @@ Table of Contents
    *  AESRound(a, b): the AES encryption round function. a is the
       128-bit state, b is the 128-bit round key
 
+   *  Repeat(n, F): n sequential evaluations of the function F
+
+   AEGIS internal functions:
+
    *  Update(Ma, Mb): the state update function
 
    *  Init(k, iv): the initialization function
@@ -152,7 +158,7 @@ Table of Contents
 
    *  Finalize(adlen, mlen): the authentication tag generation function
 
-   *  Repeat(n, F): n sequential evaluations of the function F
+   AES blocks:
 
    *  Si: the i-th 128-bit block of the current state
 
@@ -163,6 +169,8 @@ Table of Contents
 
    *  C1: the 128-bit constant 0xdb3d18556dc22ff12011314273b528dd as an
       AES block
+
+   Input and output values:
 
    *  k: the encryption key (128-bit for AEGIS-128L, 256-bit for AEGIS-
       256)

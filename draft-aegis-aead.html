@@ -1284,81 +1284,91 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       <h2 id="name-notation-and-conventions">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-notation-and-conventions" class="section-name selfRef">Notation and Conventions</a>
       </h2>
+<p id="section-3-1">Primitives:<a href="#section-3-1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-3-1.1">
-          <code>|x|</code>: the length of <code>x</code> in bits<a href="#section-3-1.1" class="pilcrow">¶</a>
+<li class="normal" id="section-3-2.1">
+          <code>|x|</code>: the length of <code>x</code> in bits<a href="#section-3-2.1" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-3-1.2">
-          <code>a ^ b</code>: the bit-wise exclusive OR operation between <code>a</code> and <code>b</code><a href="#section-3-1.2" class="pilcrow">¶</a>
+        <li class="normal" id="section-3-2.2">
+          <code>a ^ b</code>: the bit-wise exclusive OR operation between <code>a</code> and <code>b</code><a href="#section-3-2.2" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-3-1.3">
-          <code>a &amp; b</code>: the bit-wise AND operation between <code>a</code> and <code>b</code><a href="#section-3-1.3" class="pilcrow">¶</a>
+        <li class="normal" id="section-3-2.3">
+          <code>a &amp; b</code>: the bit-wise AND operation between <code>a</code> and <code>b</code><a href="#section-3-2.3" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-3-1.4">
-          <code>a || b</code>: the concatenation of <code>a</code> and <code>b</code><a href="#section-3-1.4" class="pilcrow">¶</a>
+        <li class="normal" id="section-3-2.4">
+          <code>a || b</code>: the concatenation of <code>a</code> and <code>b</code><a href="#section-3-2.4" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-3-1.5">
-          <code>LE64(x)</code>: the little-endian encoding of 64-bit integer <code>x</code><a href="#section-3-1.5" class="pilcrow">¶</a>
+        <li class="normal" id="section-3-2.5">
+          <code>LE64(x)</code>: the little-endian encoding of 64-bit integer <code>x</code><a href="#section-3-2.5" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-3-1.6">
-          <code>Pad(x, n)</code>: padding operation. Trailing zeros are concatenated to <code>x</code> until the total length is a multiple of <code>n</code> bits.<a href="#section-3-1.6" class="pilcrow">¶</a>
+        <li class="normal" id="section-3-2.6">
+          <code>Pad(x, n)</code>: padding operation. Trailing zeros are concatenated to <code>x</code> until the total length is a multiple of <code>n</code> bits.<a href="#section-3-2.6" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-3-1.7">
-          <code>Truncate(x, n)</code>: truncation operation. The first <code>n</code> bits of <code>x</code> are kept.<a href="#section-3-1.7" class="pilcrow">¶</a>
+        <li class="normal" id="section-3-2.7">
+          <code>Truncate(x, n)</code>: truncation operation. The first <code>n</code> bits of <code>x</code> are kept.<a href="#section-3-2.7" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-3-1.8">
-          <code>Split(x, n)</code>: splitting operation. <code>x</code> is split into <code>n</code>-bit blocks.<a href="#section-3-1.8" class="pilcrow">¶</a>
+        <li class="normal" id="section-3-2.8">
+          <code>Split(x, n)</code>: splitting operation. <code>x</code> is split into <code>n</code>-bit blocks.<a href="#section-3-2.8" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-3-1.9">
-          <code>AESRound(a, b)</code>: the AES encryption round function. <code>a</code> is the 128-bit state, <code>b</code> is the 128-bit round key<a href="#section-3-1.9" class="pilcrow">¶</a>
+        <li class="normal" id="section-3-2.9">
+          <code>AESRound(a, b)</code>: the AES encryption round function. <code>a</code> is the 128-bit state, <code>b</code> is the 128-bit round key<a href="#section-3-2.9" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-3-1.10">
-          <code>Update(Ma, Mb)</code>: the state update function<a href="#section-3-1.10" class="pilcrow">¶</a>
+        <li class="normal" id="section-3-2.10">
+          <code>Repeat(n, F)</code>: <code>n</code> sequential evaluations of the function <code>F</code><a href="#section-3-2.10" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-3-1.11">
-          <code>Init(k, iv)</code>: the initialization function<a href="#section-3-1.11" class="pilcrow">¶</a>
+      </ul>
+<p id="section-3-3">AEGIS internal functions:<a href="#section-3-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3-4.1">
+          <code>Update(Ma, Mb)</code>: the state update function<a href="#section-3-4.1" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-3-1.12">
-          <code>Enc(xi)</code>: the 256-bit block encryption function<a href="#section-3-1.12" class="pilcrow">¶</a>
+        <li class="normal" id="section-3-4.2">
+          <code>Init(k, iv)</code>: the initialization function<a href="#section-3-4.2" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-3-1.13">
-          <code>Dec(xi)</code>: the 256-bit block decryption function<a href="#section-3-1.13" class="pilcrow">¶</a>
+        <li class="normal" id="section-3-4.3">
+          <code>Enc(xi)</code>: the 256-bit block encryption function<a href="#section-3-4.3" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-3-1.14">
-          <code>Finalize(adlen, mlen)</code>: the authentication tag generation function<a href="#section-3-1.14" class="pilcrow">¶</a>
+        <li class="normal" id="section-3-4.4">
+          <code>Dec(xi)</code>: the 256-bit block decryption function<a href="#section-3-4.4" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-3-1.15">
-          <code>Repeat(n, F)</code>: <code>n</code> sequential evaluations of the function <code>F</code><a href="#section-3-1.15" class="pilcrow">¶</a>
+        <li class="normal" id="section-3-4.5">
+          <code>Finalize(adlen, mlen)</code>: the authentication tag generation function<a href="#section-3-4.5" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-3-1.16">
-          <code>Si</code>: the <code>i</code>-th 128-bit block of the current state<a href="#section-3-1.16" class="pilcrow">¶</a>
+      </ul>
+<p id="section-3-5">AES blocks:<a href="#section-3-5" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3-6.1">
+          <code>Si</code>: the <code>i</code>-th 128-bit block of the current state<a href="#section-3-6.1" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-3-1.17">
-          <code>S'i</code>: the <code>i</code>-th 128-bit block of the next state<a href="#section-3-1.17" class="pilcrow">¶</a>
+        <li class="normal" id="section-3-6.2">
+          <code>S'i</code>: the <code>i</code>-th 128-bit block of the next state<a href="#section-3-6.2" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-3-1.18">
-          <code>C0</code>: the 128-bit constant <code>0x101020305080d1522375990e97962</code> as an AES block<a href="#section-3-1.18" class="pilcrow">¶</a>
+        <li class="normal" id="section-3-6.3">
+          <code>C0</code>: the 128-bit constant <code>0x101020305080d1522375990e97962</code> as an AES block<a href="#section-3-6.3" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-3-1.19">
-          <code>C1</code>: the 128-bit constant <code>0xdb3d18556dc22ff12011314273b528dd</code> as an AES block<a href="#section-3-1.19" class="pilcrow">¶</a>
+        <li class="normal" id="section-3-6.4">
+          <code>C1</code>: the 128-bit constant <code>0xdb3d18556dc22ff12011314273b528dd</code> as an AES block<a href="#section-3-6.4" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-3-1.20">
-          <code>k</code>: the encryption key (128-bit for AEGIS-128L, 256-bit for AEGIS-256)<a href="#section-3-1.20" class="pilcrow">¶</a>
+      </ul>
+<p id="section-3-7">Input and output values:<a href="#section-3-7" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3-8.1">
+          <code>k</code>: the encryption key (128-bit for AEGIS-128L, 256-bit for AEGIS-256)<a href="#section-3-8.1" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-3-1.21">
-          <code>iv</code>: the public nonce (128-bit for AEGIS-128L, 256-bit for AEGIS-256)<a href="#section-3-1.21" class="pilcrow">¶</a>
+        <li class="normal" id="section-3-8.2">
+          <code>iv</code>: the public nonce (128-bit for AEGIS-128L, 256-bit for AEGIS-256)<a href="#section-3-8.2" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-3-1.22">
-          <code>ad</code>: the associated data<a href="#section-3-1.22" class="pilcrow">¶</a>
+        <li class="normal" id="section-3-8.3">
+          <code>ad</code>: the associated data<a href="#section-3-8.3" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-3-1.23">
-          <code>m</code>: the cleartext input<a href="#section-3-1.23" class="pilcrow">¶</a>
+        <li class="normal" id="section-3-8.4">
+          <code>m</code>: the cleartext input<a href="#section-3-8.4" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-3-1.24">
-          <code>c</code>: the ciphertext<a href="#section-3-1.24" class="pilcrow">¶</a>
+        <li class="normal" id="section-3-8.5">
+          <code>c</code>: the ciphertext<a href="#section-3-8.5" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-3-1.25">
-          <code>tag</code>: the 128-bit authentication tag<a href="#section-3-1.25" class="pilcrow">¶</a>
+        <li class="normal" id="section-3-8.6">
+          <code>tag</code>: the 128-bit authentication tag<a href="#section-3-8.6" class="pilcrow">¶</a>
 </li>
       </ul>
 </section>
