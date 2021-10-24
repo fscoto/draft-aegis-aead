@@ -22,7 +22,7 @@ Discussion Venues
    This note is to be removed before publishing as an RFC.
 
    Source for this draft and an issue tracker can be found at
-   https://github.com/jedisct1/draft-aegis-aead.
+   https://github.com/dip-proto/ad.
 
 Status of This Memo
 
@@ -87,7 +87,7 @@ Table of Contents
 1.  Introduction
 
    This document describes the AEGIS-128L and AEGIS-256 authenticated
-   encryption algorithms.
+   encryption algorithms [AEGIS].
 
    Both are constructed from the AES encryption round function
    [FIPS-AES] and target a 128-bit security level.
@@ -182,14 +182,14 @@ Table of Contents
    S'6 = AESRound(S5, S6);
    S'7 = AESRound(S6, S7);
 
-    S0 = S'0
-    S1 = S'1
-    S2 = S'2
-    S3 = S'3
-    S4 = S'4
-    S5 = S'5
-    S6 = S'6
-    S7 = S'7
+   S0  = S'0
+   S1  = S'1
+   S2  = S'2
+   S3  = S'3
+   S4  = S'4
+   S5  = S'5
+   S6  = S'6
+   S7  = S'7
 
 4.2.  The Init(k, iv) Function
 
@@ -244,7 +244,7 @@ Table of Contents
    Repeat(7, Update(t, t))
    tag = S0 ^ S1 ^ S2 ^ S3 ^ S4 ^ S5 ^ S6
 
-   The function returns tag.
+   The function returns the 128-bit authentication tag.
 
 4.6.  Authenticated Encryption
 
@@ -306,7 +306,7 @@ Table of Contents
    In the later case, the tag is expected to immediately follow the
    ciphertext:
 
-   c || tag
+   combined_ciphertext = c || tag
 
 7.  Security Considerations
 
