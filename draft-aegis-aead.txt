@@ -113,13 +113,13 @@ Table of Contents
 
    *  |x|: the length of x in bits
 
-   *  a ^ b: bit-wise exclusive OR operation between a and b
+   *  a ^ b: the bit-wise exclusive OR operation between a and b
 
-   *  a & b: bit-wise AND operation between a and b
+   *  a & b: the bit-wise AND operation between a and b
 
-   *  ||: concatenation
+   *  a || b: the concatenation of a and b
 
-   *  LE64(x): little-endian encoding of 64-bit integer x
+   *  LE64(x): the little-endian encoding of 64-bit integer x
 
    *  Pad(x, n): padding operation.  Trailing zeros are concatenated to
       x until the total length is a multiple of n bits.
