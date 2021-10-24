@@ -22,7 +22,7 @@ Discussion Venues
    This note is to be removed before publishing as an RFC.
 
    Source for this draft and an issue tracker can be found at
-   https://github.com/dip-proto/ad.
+   https://github.com/jedisct1/draft-aegis-aead.
 
 Status of This Memo
 
