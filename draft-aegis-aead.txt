@@ -8,7 +8,7 @@ Intended status: Informational                           24 October 2021
 Expires: 27 April 2022
 
 
-              The AEGIS authenticated encryption algorithm
+        The AEGIS family of authenticated encryption algorithms
                         draft-aegis-aead-latest
 
 Abstract
