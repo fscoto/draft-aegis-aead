@@ -3,7 +3,7 @@
 
 
 Network Working Group                                           F. Denis
-Internet-Draft                                                    Fastly
+Internet-Draft                                               Fastly Inc.
 Intended status: Informational                           24 October 2021
 Expires: 27 April 2022
 
@@ -381,10 +381,13 @@ Table of Contents
 
 10.2.  Informative References
 
-   [AEGIS]    "AEGIS: A fast encryption algorithm", n.d..
+   [AEGIS]    "AEGIS: A fast encryption algorithm", n.d.,
+              <https://competitions.cr.yp.to/round3/aegisv11.pdf>.
 
    [FIPS-AES] "Specification for the ADVANCED ENCRYPTION STANDARD
-              (AES)", n.d..
+              (AES)", n.d.,
+              <https://csrc.nist.gov/publications/detail/fips/197/
+              final>.
 
 Acknowledgments
 
@@ -393,6 +396,6 @@ Acknowledgments
 Author's Address
 
    Frank Denis
-   Fastly
+   Fastly Inc.
 
    Email: fd@00f.net
