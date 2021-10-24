@@ -2036,11 +2036,13 @@ combined_ciphertext = c || tag
       <h2 id="name-security-considerations">
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-7-1">Both algorithms are key-committing and are designed to offer 128-bit security in a nonce-respecting setting.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-1">Both algorithms are key-committing and must be used in a nonce-respecting setting.<a href="#section-7-1" class="pilcrow">¶</a></p>
 <p id="section-7-2">The nonce <code>iv</code> doesn't have to be secret nor unpredictable. It can be a counter, the output of a permutation or a generator with a long period.<a href="#section-7-2" class="pilcrow">¶</a></p>
-<p id="section-7-3">With AEGIS-128L, random nonces are also safe to encrypt up to 2^32 messages using the same key with negligible collision probability.<a href="#section-7-3" class="pilcrow">¶</a></p>
-<p id="section-7-4">With AEGIS-256, random nonces are safe to use with no practical limits.<a href="#section-7-4" class="pilcrow">¶</a></p>
+<p id="section-7-3">With AEGIS-128L, random nonces can safely encrypt up to 2^32 messages using the same key with negligible collision probability.<a href="#section-7-3" class="pilcrow">¶</a></p>
+<p id="section-7-4">With AEGIS-256, random nonces can be used with no practical limits.<a href="#section-7-4" class="pilcrow">¶</a></p>
 <p id="section-7-5">However, for a given key <code>k</code>, a nonce must only be used once. Failure to do so would immediately reveal the bitwise difference between two messages.<a href="#section-7-5" class="pilcrow">¶</a></p>
+<p id="section-7-6">Under the assumption that the secret key is unknown to the attacker and the tag is not truncated, both AEGIS-128L and AEGIS-256 target 128-bit security against forgery attacks.<a href="#section-7-6" class="pilcrow">¶</a></p>
+<p id="section-7-7">AEGIS-256 offers 256-bit message security against plaintext and state recovery. AEGIS-128L offers 128-bit security.<a href="#section-7-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
