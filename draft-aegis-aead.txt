@@ -472,8 +472,8 @@ Table of Contents
    limits.
 
    However, for a given key k, a nonce must only be used once.  Failure
-   to do so would immediately reveal the plaintext difference between
-   two messages.
+   to do so would immediately reveal the bitwise difference between two
+   messages.
 
 8.  IANA Considerations
 
