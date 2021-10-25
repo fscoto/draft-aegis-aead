@@ -4,8 +4,8 @@
 
 Network Working Group                                           F. Denis
 Internet-Draft                                               Fastly Inc.
-Intended status: Informational                           24 October 2021
-Expires: 27 April 2022
+Intended status: Informational                           25 October 2021
+Expires: 28 April 2022
 
 
         The AEGIS family of authenticated encryption algorithms
@@ -39,7 +39,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 27 April 2022.
+   This Internet-Draft will expire on 28 April 2022.
 
 Copyright Notice
 
@@ -815,4 +815,4 @@ Author's Address
    Frank Denis
    Fastly Inc.
 
-   Email: fd@00f.net
+   Email: fde@00f.net
