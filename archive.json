@@ -1,0 +1,79 @@
+{
+  "magic": "E!vIA5L86J2I",
+  "timestamp": "2021-10-26T00:53:33.561872+00:00",
+  "repo": "jedisct1/draft-aegis-aead",
+  "labels": [
+    {
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    },
+    {
+      "name": "documentation",
+      "description": "Improvements or additions to documentation",
+      "color": "0075ca"
+    },
+    {
+      "name": "duplicate",
+      "description": "This issue or pull request already exists",
+      "color": "cfd3d7"
+    },
+    {
+      "name": "enhancement",
+      "description": "New feature or request",
+      "color": "a2eeef"
+    },
+    {
+      "name": "help wanted",
+      "description": "Extra attention is needed",
+      "color": "008672"
+    },
+    {
+      "name": "good first issue",
+      "description": "Good for newcomers",
+      "color": "7057ff"
+    },
+    {
+      "name": "invalid",
+      "description": "This doesn't seem right",
+      "color": "e4e669"
+    },
+    {
+      "name": "question",
+      "description": "Further information is requested",
+      "color": "d876e3"
+    },
+    {
+      "name": "wontfix",
+      "description": "This will not be worked on",
+      "color": "ffffff"
+    }
+  ],
+  "issues": [
+    {
+      "number": 1,
+      "id": "I_kwDOGRNxcs49qKJw",
+      "title": "Draft name mismatches IETF requirements",
+      "url": "https://github.com/jedisct1/draft-aegis-aead/issues/1",
+      "state": "CLOSED",
+      "author": "fscoto",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Hi, I saw your link on /r/crypto and would like to help out. Something that stood out to me was the name of the draft. I may, however, be unable to file PRs for a while until the IP situation is cleared with my employer.\r\n\r\nThe [IETF Guidelines to Authors of Internet-Drafts](https://www.ietf.org/ietf-ftp/ietf/1id-guidelines.html) state:\r\n\r\n> 1. All I-D filenames begin with \"draft\"\r\n> 2. Document source:\r\n> *  Working Group: The string \"ietf-\" followed by the working group acronym.\r\n> *  Other: A string identifying an IETF-related body. The currently allowed list is [...]\r\n> * Individual: A string related to the name of one of the authors in some way. There are no mechanical rules for this string but objectionable or misleading strings are subject to change or removal at the discretion of the Secretariat.\r\n> 3. Document name. For non-working group documents that are targeted at a working group, this string often begins with the working group abbreviation. This document name is a word or two that reflect what the draft is about.\r\n> 4. Two digit decimal version number; the initial draft uses \"00\".\r\n\r\nSince as far as I can tell, this effort is (currently) not part of a working group, so it would be by definition \u201cindividual\u201d. To follow IETF requirements, it looks like it needs to be renamed from `draft-aegis-aead-latest` to `draft-jedis-aegis-aead-00`.",
+      "createdAt": "2021-10-24T16:50:57Z",
+      "updatedAt": "2021-10-24T21:32:27Z",
+      "closedAt": "2021-10-24T21:28:30Z",
+      "comments": [
+        {
+          "author": "jedisct1",
+          "authorAssociation": "OWNER",
+          "body": "Thanks for your input!\r\n\r\nThe draft has been renamed.\r\n\r\nThanks again!",
+          "createdAt": "2021-10-24T21:32:27Z",
+          "updatedAt": "2021-10-24T21:32:27Z"
+        }
+      ]
+    }
+  ],
+  "pulls": []
+}
