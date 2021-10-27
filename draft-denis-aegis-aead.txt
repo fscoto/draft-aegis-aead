@@ -4,8 +4,8 @@
 
 Network Working Group                                           F. Denis
 Internet-Draft                                               Fastly Inc.
-Intended status: Informational                           25 October 2021
-Expires: 28 April 2022
+Intended status: Informational                           27 October 2021
+Expires: 30 April 2022
 
 
         The AEGIS family of authenticated encryption algorithms
@@ -39,7 +39,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 April 2022.
+   This Internet-Draft will expire on 30 April 2022.
 
 Copyright Notice
 
@@ -681,7 +681,8 @@ Table of Contents
 
 8.  IANA Considerations
 
-   This document has no IANA actions.
+   IANA is requested to assign the values for AEAD_AEGIS128L and
+   AEAD_AEGIS256 in the registry of AEAD algorithms.
 
 9.  Test Vectors
 
@@ -815,4 +816,4 @@ Author's Address
    Frank Denis
    Fastly Inc.
 
-   Email: fde@00f.net
+   Email: fd@00f.net
